@@ -1,0 +1,27 @@
+version: '3'
+
+tasks:
+  init:
+    cmds:
+      - task: download-deps
+      - task: install-mockery
+      - task: gen-mocks
+    
+  test:
+    cmd: go test ./...
+
+  download-deps:
+    cmd: go mod download -x
+
+  update-deps:
+    cmd: go get -u -t ./...
+  
+  install-mockery:
+    cmd: go install github.com/vektra/mockery/v2@v2.42.0
+    status:
+      - mockery version
+
+  gen-mocks:
+    cmd: mockery
+    preconditions:
+      - test -f .mockery.yaml

@@ -1,0 +1,13 @@
+with-expecter: True
+mockname: "{{.InterfaceName}}"
+filename: "{{.MockName}}.go"
+dir: mocks
+outpkg: mocks
+all: True
+packages:
+  github.com/go-ldap/ldap/v3:
+    config:
+      recursive: True
+      exclude:
+        - gssapi
+      
